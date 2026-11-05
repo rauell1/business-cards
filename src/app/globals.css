@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Surfaces: warm paper, never sterile grey ─────────────────────────── */
+  --color-paper: #f8f5ef;
+  --color-paper-2: #f2ece1;
+  --color-paper-3: #e9e1d3;
+  --color-ink: #10201a;
+  --color-ink-soft: #23362e;
+
+  /* ── Brand: deep forest + clay accent + brass detail ──────────────────── */
+  --color-forest: #12362a;
+  --color-forest-600: #1a4a39;
+  --color-forest-400: #2f6b52;
+  --color-moss: #6f8f63;
+  --color-clay: #b8613a;
+  --color-clay-soft: #d98d63;
+  --color-brass: #b8912f;
+  --color-sand: #ded2bd;
+
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+
+  --radius-xs: 0.375rem;
+  --radius-xl2: 1.25rem;
+
+  --shadow-lift: 0 1px 2px rgba(16, 32, 26, 0.04), 0 12px 32px -12px rgba(16, 32, 26, 0.16);
+  --shadow-card: 0 1px 1px rgba(16, 32, 26, 0.03), 0 24px 60px -20px rgba(16, 32, 26, 0.24);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.6) inset, 0 30px 80px -30px rgba(18, 54, 42, 0.45);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-forest);
+    color: #f8f5ef;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Refined glassmorphism — light, not frosted plastic */
+@utility glass {
+  background: color-mix(in oklab, #ffffff 55%, transparent);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 20px 50px -24px rgba(16, 32, 26, 0.28);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, #12362a 55%, transparent);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 70px -30px rgba(0, 0, 0, 0.6);
+}
+
+/* Fine film grain keeps flat gradients from looking synthetic */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 0.98;
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Hairline rules, for that printed-matter discipline */
+@utility rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-ink) 14%, transparent) 18%,
+    color-mix(in oklab, var(--color-ink) 14%, transparent) 82%,
+    transparent
+  );
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1.2deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1.2deg);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(3%, -4%, 0) scale(1.06);
+  }
+  66% {
+    transform: translate3d(-3%, 3%, 0) scale(0.97);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ticker-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+.animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 26s ease-in-out infinite;
+}
+.animate-drift-slow {
+  animation: drift 38s ease-in-out infinite reverse;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+.group:hover .sheen-run {
+  animation: sheen 0.9s ease-out;
+}
+
+/* Accessible skip link */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  transition: transform 0.2s var(--ease-out-soft);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
