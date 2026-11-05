@@ -55,6 +55,17 @@ Last updated: phase 3 (public website) landed.
 | vCard generation | ⬜ |
 | QR PNG/SVG export endpoint | ⬜ |
 
+## Deployment
+
+| Item | State | Note |
+|---|---|---|
+| `npm ci` + `next build` from clean checkout | ✅ | Verified via `git archive main` into a fresh dir |
+| `npm audit --omit=dev` | ✅ 0 vulnerabilities | Was 2 (incl. CVE-2025-66478 in next@15.1.6); upgraded to Next 16.4.5 / React 19.3.1 |
+| `engines.node` pinned | ✅ | `>=20.9.0` |
+| Build-time environment variables | ✅ none needed | No `process.env` reads in `src/` |
+| `docs/DEPLOYMENT.md` runbook | ✅ | |
+| **Vercel project linked / production deploy** | 🔒 | `deployments: []` — repo never connected. Requires the owner to import it at vercel.com/new; the agent sandbox cannot reach `api.vercel.com`. |
+
 ## Phase 5–9
 
 | Module | State |

@@ -58,12 +58,21 @@ hard-coded inside components, so content edits never touch layout.
 > demo content, and the reference site could not be audited from the build
 > environment. Read `docs/REFERENCE_AUDIT.md` first.
 
+## Deployment
+
+The production build is Vercel-ready: `npm ci && next build`, no environment
+variables required, all routes statically prerendered. **It has not been
+deployed** — the repository still needs to be imported into Vercel once
+(`vercel.com/new`). Full runbook, domain setup and rollback steps:
+`docs/DEPLOYMENT.md`.
+
 ## Documentation
 
 - `docs/REFERENCE_AUDIT.md` — what was and was not verified
 - `docs/SYSTEM_ARCHITECTURE.md` — the two-product model, caching, events
 - `docs/DATABASE_SCHEMA.md` — Neon/Drizzle entity design and constraints
 - `docs/SECURITY.md` — controls and Kenya DPA posture
+- `docs/DEPLOYMENT.md` — Vercel, domain and Neon setup
 - `docs/IMPLEMENTATION_PROGRESS.md` — what's done, pending, blocked
 
 ## Roadmap
