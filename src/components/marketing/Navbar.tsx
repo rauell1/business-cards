@@ -19,9 +19,9 @@ export function Navbar() {
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 16));
 
-  /* Scroll spy — highlights the section currently in the reading band. */
+  /* Scroll spy: highlights the section currently in the reading band. */
   useEffect(() => {
-    const ids = nav.map((n) => n.href.replace("#", ""));
+    const ids = nav.map((n) => n.href.replace(/^\/?#/, ""));
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -32,9 +32,9 @@ export function Navbar() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(`#${visible.target.id}`);
+        if (visible) setActive(`/#${visible.target.id}`);
       },
-      { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.25, 0.6] },
+      { rootMargin: "-42% 0px -48% 0px", threshold: [0, 0.25, 0.6] },
     );
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
@@ -53,7 +53,7 @@ export function Navbar() {
       }
       if (e.key === "Tab" && panelRef.current) {
         const nodes = panelRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled])',
+          "a[href], button:not([disabled])",
         );
         if (!nodes.length) return;
         const first = nodes[0];
@@ -81,18 +81,13 @@ export function Navbar() {
 
   return (
     <>
-      {/* Announcement strip — sets the offer before anything else loads. */}
-      <div
-        className={cn(
-          "relative z-50 overflow-hidden bg-forest text-paper/85 transition-[height,opacity] duration-500",
-          scrolled ? "h-0 opacity-0" : "h-9 opacity-100",
-        )}
-      >
-        <div className="container-x flex h-9 items-center justify-center gap-2 text-[0.7rem] tracking-[0.02em] sm:text-xs">
+      {/* Announcement strip: stays in natural document flow to avoid first-scroll layout shift. */}
+      <div className="relative z-40 bg-forest text-paper/90">
+        <div className="container-x flex h-9 items-center justify-center gap-2 text-[0.75rem] tracking-[0.02em]">
           <span className="hidden size-1.5 rounded-full bg-clay-soft sm:block" aria-hidden="true" />
           <p className="truncate">
-            Free delivery within Nairobi this month — over 55% of every order funds
-            reforestation.
+            Free delivery within Nairobi this month. Over 55% of every order funds
+            Kenyan reforestation.
           </p>
         </div>
       </div>
@@ -104,7 +99,7 @@ export function Navbar() {
         className={cn(
           "sticky top-0 z-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           scrolled
-            ? "border-b border-ink/8 bg-paper/72 backdrop-blur-xl backdrop-saturate-150"
+            ? "border-b border-ink/8 bg-paper/80 backdrop-blur-xl backdrop-saturate-150"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -113,20 +108,22 @@ export function Navbar() {
           className="container-x flex h-16 items-center justify-between gap-6 md:h-[4.5rem]"
         >
           <a
-            href="#top"
+            href="/#top"
             className="group flex shrink-0 items-center gap-2.5 rounded-lg"
-            aria-label={`${site.name} — home`}
+            aria-label={`${site.name} home`}
           >
             <Logo className="size-8 transition-transform duration-500 group-hover:rotate-[8deg]" />
             <span className="flex flex-col leading-none">
-              <span className="text-[1.05rem] font-semibold tracking-[-0.03em] text-ink">
+              <span className="text-[1.08rem] font-semibold tracking-[-0.03em] text-ink">
                 {site.name}
               </span>
-              <span className="eyebrow text-[0.5rem] text-ink/60">Africa</span>
+              <span className="mt-0.5 eyebrow text-[0.625rem] text-ink/70">
+                {site.subLabel}
+              </span>
             </span>
           </a>
 
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center gap-0.5 lg:flex">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
@@ -136,14 +133,14 @@ export function Navbar() {
                     "relative inline-flex h-9 items-center rounded-full px-3.5 text-[0.8125rem] font-medium transition-colors duration-300",
                     active === item.href
                       ? "text-ink"
-                      : "text-ink/60 hover:text-ink",
+                      : "text-ink/70 hover:text-ink",
                   )}
                 >
                   {item.label}
                   {active === item.href && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 -z-10 rounded-full bg-ink/6"
+                      className="absolute inset-0 -z-10 rounded-full bg-ink/8"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -153,11 +150,11 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <CTA href="#pricing" variant="ghost" size="sm" className="hidden sm:inline-flex">
-              Sign in
+            <CTA href="/p/wanjiru" variant="ghost" size="sm" className="hidden sm:inline-flex">
+              Live profile
             </CTA>
-            <CTA href="#cta" variant="primary" size="sm" className="hidden sm:inline-flex" withArrow>
-              Get your card
+            <CTA href="/#cta" variant="primary" size="sm" className="hidden sm:inline-flex" withArrow>
+              Get your {site.name}
             </CTA>
 
             <button
@@ -167,7 +164,7 @@ export function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 bg-white/60 text-ink backdrop-blur transition-colors hover:bg-white lg:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 bg-white/70 text-ink backdrop-blur transition-colors hover:bg-white lg:hidden"
             >
               {open ? <X className="size-4.5" /> : <Menu className="size-4.5" />}
             </button>
@@ -178,7 +175,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-45 lg:hidden"
+            className="fixed inset-0 z-50 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -222,16 +219,16 @@ export function Navbar() {
                     key={item.href}
                     initial={reduce ? false : { opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.06 + i * 0.045, duration: 0.4 }}
+                    transition={{ delay: 0.05 + i * 0.04, duration: 0.38 }}
                     className="border-b border-ink/6 last:border-0"
                   >
                     <a
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-between py-4 text-[1.35rem] text-display text-ink"
+                      className="flex items-center justify-between py-3.5 text-[1.3rem] text-display text-ink"
                     >
                       {item.label}
-                      <span className="eyebrow text-[0.55rem] text-ink/60">
+                      <span className="eyebrow text-[0.6875rem] text-ink/65">
                         0{i + 1}
                       </span>
                     </a>
@@ -240,13 +237,13 @@ export function Navbar() {
               </ul>
 
               <div className="container-x flex flex-col gap-2.5 pt-3 pb-7">
-                <CTA href="#cta" variant="primary" size="lg" withArrow onClick={() => setOpen(false)}>
-                  Get your Kadi
+                <CTA href="/#cta" variant="primary" size="lg" withArrow onClick={() => setOpen(false)}>
+                  Get your {site.name}
                 </CTA>
-                <CTA href="#pricing" variant="secondary" size="lg" onClick={() => setOpen(false)}>
-                  See pricing
+                <CTA href="/p/wanjiru" variant="secondary" size="lg" onClick={() => setOpen(false)}>
+                  Try live demo profile
                 </CTA>
-                <p className="pt-2 text-center text-xs text-ink/60">
+                <p className="pt-2 text-center text-xs text-ink/70">
                   {site.location} · Dispatch in 48 hours
                 </p>
               </div>

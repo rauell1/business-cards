@@ -32,10 +32,10 @@ export function HowItWorks() {
                 title={
                   <>
                     From parcel to first{" "}
-                    <span className="italic text-brass">handshake.</span>
+                    <span className="italic text-brass">lasting mark.</span>
                   </>
                 }
-                body="No technical setup, no app store, no IT department. Order the card, build the profile, then let it do the introductions."
+                body="No technical setup, no app store, no IT department. Commission your card, curate the value on your profile, and let a single tap handle the introduction."
               />
             </Reveal>
 
@@ -58,11 +58,11 @@ export function HowItWorks() {
                       <h3 className="text-[1.125rem] font-semibold tracking-[-0.02em] text-paper">
                         {step.title}
                       </h3>
-                      <p className="mt-1.5 max-w-[42ch] text-[0.9rem] leading-relaxed text-paper/62">
+                      <p className="mt-1.5 max-w-[42ch] text-[0.9rem] leading-relaxed text-paper/75">
                         {step.body}
                       </p>
-                      <p className="mt-3 inline-flex items-center gap-1.5 text-[0.6875rem] tracking-[0.04em] text-brass/80 uppercase">
-                        <span className="size-1 rounded-full bg-brass/70" aria-hidden="true" />
+                      <p className="mt-3 inline-flex items-center gap-1.5 text-[0.6875rem] tracking-[0.04em] text-brass uppercase">
+                        <span className="size-1 rounded-full bg-brass" aria-hidden="true" />
                         {step.detail}
                       </p>
                     </div>
@@ -72,13 +72,13 @@ export function HowItWorks() {
             </ol>
           </div>
 
-          {/* Tap visual with radiating rings */}
+          {/* Tap visual with radiating rings aligned to the card-to-phone NFC contact point */}
           <Reveal delay={0.15} className="relative">
             <div className="relative mx-auto max-w-md">
               <div className="relative overflow-hidden rounded-[1.5rem] border border-paper/12 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.8)]">
                 <Image
                   src="/images/tap.webp"
-                  alt="A hand tapping a smartphone against a slim wooden NFC card"
+                  alt="A Kenyan professional tapping a walnut Alama NFC card to the top edge of a smartphone"
                   width={1408}
                   height={788}
                   sizes="(max-width: 1024px) 90vw, 40vw"
@@ -86,19 +86,19 @@ export function HowItWorks() {
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/65 via-transparent to-transparent"
                 />
 
-                {/* tap connector */}
-                <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                {/* tap connector positioned over the NFC contact edge */}
+                <div className="pointer-events-none absolute top-[54%] left-[63%] -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
                   <div className="relative">
                     {!reduce &&
                       [0, 1, 2].map((i) => (
                         <motion.span
                           key={i}
-                          className="absolute top-1/2 left-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-paper/40"
+                          className="absolute top-1/2 left-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-paper/50"
                           initial={{ scale: 0.4, opacity: 0 }}
-                          whileInView={{ scale: [0.4, 2.2], opacity: [0.55, 0] }}
+                          whileInView={{ scale: [0.4, 2.2], opacity: [0.65, 0] }}
                           viewport={{ once: false }}
                           transition={{
                             duration: 3,
@@ -108,14 +108,14 @@ export function HowItWorks() {
                           }}
                         />
                       ))}
-                    <span className="relative flex size-9 items-center justify-center rounded-full bg-paper/15 backdrop-blur-md ring-1 ring-paper/40">
-                      <span className="size-2 rounded-full bg-brass shadow-[0_0_14px_3px_rgba(184,145,47,0.7)]" />
+                    <span className="relative flex size-8 items-center justify-center rounded-full bg-paper/20 backdrop-blur-md ring-1 ring-paper/50">
+                      <span className="size-2 rounded-full bg-brass shadow-[0_0_14px_3px_rgba(184,145,47,0.85)]" />
                     </span>
                   </div>
                 </div>
 
                 <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                  <p className="glass-dark rounded-xl px-3.5 py-2.5 text-[0.75rem] text-paper/80">
+                  <p className="glass-dark rounded-xl px-3.5 py-2.5 text-[0.75rem] text-paper/85">
                     <span className="font-medium text-paper">Hold to the top of the phone.</span>{" "}
                     That is the entire instruction.
                   </p>
@@ -128,9 +128,9 @@ export function HowItWorks() {
                   ["0", "apps to install"],
                   ["iOS + Android", "natively supported"],
                 ].map(([v, l]) => (
-                  <div key={l} className="rounded-xl border border-paper/10 bg-paper/[0.04] px-2 py-3">
+                  <div key={l} className="rounded-xl border border-paper/12 bg-paper/[0.05] px-2 py-3">
                     <dt className="text-[0.8125rem] font-semibold text-paper">{v}</dt>
-                    <dd className="mt-0.5 text-[0.625rem] leading-tight text-paper/55">{l}</dd>
+                    <dd className="mt-0.5 text-[0.6875rem] leading-tight text-paper/70">{l}</dd>
                   </div>
                 ))}
               </dl>

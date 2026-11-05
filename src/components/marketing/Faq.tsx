@@ -28,10 +28,10 @@ export function Faq() {
               title={
                 <>
                   The things people ask{" "}
-                  <span className="italic text-forest">before ordering.</span>
+                  <span className="italic text-forest">before commissioning.</span>
                 </>
               }
-              body="Still unsure? Message us on WhatsApp — a person replies, usually within the hour during Nairobi business days."
+              body="Still have a question? Message us on WhatsApp. A real person in Nairobi replies, usually within the hour during business days."
             />
             <div className="mt-7 flex flex-wrap gap-2.5">
               <CTA
@@ -65,7 +65,12 @@ export function Faq() {
                       id={`faq-trigger-${i}`}
                       className="group flex w-full items-start justify-between gap-5 py-5 text-left transition-colors hover:text-forest"
                     >
-                      <span className={cn("text-[0.9375rem] font-medium tracking-[-0.01em] transition-colors sm:text-base", isOpen ? "text-forest" : "text-ink/85")}>
+                      <span
+                        className={cn(
+                          "text-[0.9375rem] font-medium tracking-[-0.01em] transition-colors sm:text-base",
+                          isOpen ? "text-forest" : "text-ink/85",
+                        )}
+                      >
                         {item.q}
                       </span>
                       <span
@@ -73,7 +78,7 @@ export function Faq() {
                           "mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-400",
                           isOpen
                             ? "rotate-45 border-forest/30 bg-forest/8 text-forest"
-                            : "border-ink/12 text-ink/60 group-hover:border-ink/25 group-hover:text-ink/70",
+                            : "border-ink/15 text-ink/70 group-hover:border-ink/30 group-hover:text-ink",
                         )}
                         aria-hidden="true"
                       >
@@ -93,7 +98,7 @@ export function Faq() {
                         transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-[62ch] pb-6 pr-8 text-[0.875rem] leading-[1.7] text-ink/60">
+                        <p className="max-w-[62ch] pb-6 pr-8 text-[0.875rem] leading-[1.7] text-ink/70">
                           {item.a}
                         </p>
                       </motion.div>

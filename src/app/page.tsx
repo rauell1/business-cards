@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/marketing/Navbar";
 import { Hero } from "@/components/marketing/Hero";
 import { SocialProof } from "@/components/marketing/SocialProof";
+import { Mission } from "@/components/marketing/Mission";
+import { CardStudio } from "@/components/marketing/CardStudio";
 import { Features } from "@/components/marketing/Features";
 import { HowItWorks } from "@/components/marketing/HowItWorks";
 import { Showcase } from "@/components/marketing/Showcase";
@@ -16,6 +18,13 @@ import { QrCodeSvg } from "@/components/ui/QrCodeSvg";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
+  const demoQr = (
+    <QrCodeSvg
+      value={`${site.url}/p/wanjiru`}
+      ariaLabel={`Demo QR code linking to the sample ${site.name} profile`}
+    />
+  );
+
   return (
     <>
       <Navbar />
@@ -23,9 +32,11 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <SocialProof />
+        <Mission />
+        <CardStudio qr={demoQr} />
         <Features />
         <HowItWorks />
-        <Showcase qr={<QrCodeSvg value={`${site.url}/p/wanjiru`} ariaLabel="Demo QR code linking to the sample Kadi profile" />} />
+        <Showcase qr={demoQr} />
         <Benefits />
         <Impact />
         <Testimonials />

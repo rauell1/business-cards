@@ -17,7 +17,7 @@ export function MobileCta() {
   const [show, setShow] = useState(false);
 
   /* Visible after the hero, hidden again over the final CTA + footer so it
-     never covers legal links or duplicate the section's own buttons. */
+     never covers legal links or duplicates the section's own buttons. */
   const [nearEnd, setNearEnd] = useState(false);
 
   useEffect(() => {
@@ -69,13 +69,13 @@ export function MobileCta() {
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[0.75rem] font-semibold text-ink">
-                  One card, unlimited taps
+                  Leave a lasting mark
                 </p>
-                <p className="truncate text-[0.625rem] text-ink/60">From KES 3,500 · ships in 48h</p>
+                <p className="truncate text-[0.6875rem] text-ink/70">From KES 3,500 · ships in 48h</p>
               </div>
               <a
-                href="#cta"
-                className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-forest px-3 py-2 text-[0.6875rem] font-medium text-paper"
+                href="/#cta"
+                className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-forest px-3 py-2 text-[0.75rem] font-medium text-paper"
               >
                 Order
                 <ArrowRight className="size-3" aria-hidden="true" />

@@ -1,24 +1,24 @@
-# Kadi Africa — Reference Audit
+# Alama Identity - Reference Audit
 
-Status: **partially complete — blocked on network access.**
+Status: **partially complete - blocked on network access.**
 
 ## 1. What I could and could not verify
 
 The build sandbox has outbound access to an allowlist of hosts (`github.com`,
-`registry.npmjs.org`, `pypi.org` and their CDNs). `https://kadi.africa/` returned
+`registry.npmjs.org`, `pypi.org` and their CDNs). `https://alama.africa/` returned
 no response (`curl` exit code `000`), so **no page of the live site was fetched,
 rendered or interacted with.**
 
 Consequently:
 
 - I have **not** reproduced any proprietary layout, image, copy, or colour value
-  from kadi.africa.
+  from alama.africa.
 - Everything implemented in this repository is derived from the functionality
   list supplied in the project brief (wooden NFC cards, QR backup, digital
   profiles, editable profiles without reprinting, installable web app, scan
   tracking, AI paper-card scanning, 50%+ revenue to reforestation).
 - The visual identity here is an **original interpretation** of that product
-  ("warm editorial / Kenyan craft" direction), not a reconstruction of Kadi's.
+  ("warm editorial / Kenyan craft" direction), not a reconstruction of Alama's.
 
 ## 2. Verified feature inventory (source: project brief)
 
@@ -33,16 +33,16 @@ Consequently:
 | 7 | AI business-card scanner (OCR), optional premium | Stated in brief | Feature card only |
 | 8 | 50%+ of revenue to Kenyan reforestation | Stated in brief | Impact section |
 
-## 3. Unverified — must be confirmed against the live site
+## 3. Unverified - must be confirmed against the live site
 
 These appear in the brief or in typical NFC-card products but were **not**
 verified. They are implemented as **original product decisions**, not as claims
-about Kadi:
+about Alama:
 
 - Exact pricing, plan names and what each tier includes.
 - Delivery timelines, return and warranty policy.
-- Whether Kadi supports organisational/team accounts.
-- Whether Kadi's profile URLs use `/@username` or `/p/username`.
+- Whether Alama supports organisational/team accounts.
+- Whether Alama's profile URLs use `/@username` or `/p/username`.
 - Whether the AI scanner is bundled or a separate paid add-on.
 - All social proof numbers and testimonials on the landing page.
 

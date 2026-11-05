@@ -1,21 +1,22 @@
 /**
- * Single source of truth for marketing copy.
+ * Single source of truth for marketing copy, brand identity, and demo data.
  *
- * NOTE ON FIGURES: metrics, testimonials and example profiles below are
+ * NOTE ON FIGURES: metrics, testimonials, and example profiles below are
  * illustrative demo content for the landing page build. Swap them for verified
  * production numbers before launch. Every number lives here so that is a
  * one-file change.
  */
 
 export const site = {
-  name: "Kadi",
-  legalName: "Kadi Africa",
-  domain: "kadi.africa",
-  url: "https://kadi.africa",
-  tagline: "The last business card you will ever print.",
+  name: "Alama",
+  subLabel: "Identity",
+  legalName: "Alama Identity",
+  domain: "alama.africa",
+  url: "https://alama.africa",
+  tagline: "Don't just hand over a card. Leave a mark.",
   description:
-    "Kadi is a hand-finished wooden NFC business card. Tap any phone and your whole professional identity opens — no app, no typing, no reprints. Made in Nairobi, with over half of revenue funding reforestation in Kenya.",
-  email: "hello@kadi.africa",
+    "Alama is Swahili for mark. We craft hand-finished wooden NFC cards that share your full professional identity, portfolio, and lasting value with a single tap. No app, no typing, no reprints. Made in Nairobi, with over half of revenue funding reforestation in Kenya.",
+  email: "hello@alama.africa",
   phone: "+254 712 000 000",
   phoneHref: "+254712000000",
   location: "Nairobi, Kenya",
@@ -29,17 +30,18 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "The card", href: "#card" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Your profile", href: "#showcase" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Impact", href: "#impact" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Our ethos", href: "/#mission" },
+  { label: "Card studio", href: "/#studio" },
+  { label: "Features", href: "/#card" },
+  { label: "Your profile", href: "/#showcase" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Impact", href: "/#impact" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 export const heroStats = [
-  { value: "2,400+", label: "professionals carrying Kadi" },
-  { value: "18,000+", label: "taps exchanged this year" },
+  { value: "2,400+", label: "professionals carrying Alama" },
+  { value: "18,000+", label: "introductions made this year" },
   { value: "55%", label: "of revenue to reforestation" },
 ] as const;
 
@@ -49,127 +51,214 @@ export const trustChips = [
   "Dispatched in 48h from Nairobi",
 ] as const;
 
-/** Sectors rather than borrowed logos — we never imply an endorsement we can't verify. */
+export const missionVision = {
+  eyebrow: "The philosophy of the mark",
+  heading: "Paper shares a number. Alama leaves value.",
+  lead: "In Swahili, Alama means a mark, an imprint, or a sign. Anyone who carries an Alama card is choosing to leave real value with the person across the table, not another slip of paper destined for a desk drawer.",
+  mission: {
+    label: "Our Mission",
+    statement:
+      "To turn every first handshake into lasting professional value, replacing disposable paper with a permanent craft object that plants indigenous forests across Kenya.",
+  },
+  vision: {
+    label: "Our Vision",
+    statement:
+      "A standard of African professional identity where sharing your contact means leaving something worth keeping: context, utility, and a living footprint.",
+  },
+  valuePillars: [
+    {
+      number: "01",
+      title: "Leave utility, not homework",
+      body: "Instead of making someone type your email from cardstock, your tap gives them instant access to your calendar, pitch deck, case studies, and one-press contact save.",
+    },
+    {
+      number: "02",
+      title: "Command the room quietly",
+      body: "Hand-oiled hardwood and engraved brass carry weight. When you place an Alama on the table, the craft speaks before you say a word.",
+    },
+    {
+      number: "03",
+      title: "Rooted in Kenyan soil",
+      body: "Every card replaces thousands of paper reprints and directs 55% of revenue into audited indigenous tree planting with smallholder growers.",
+    },
+  ],
+} as const;
+
+export type CardFinishId = "walnut" | "ebony" | "olive";
+
+export const cardFinishes = [
+  {
+    id: "walnut" as const,
+    name: "Highland Walnut",
+    tier: "Included in Solo & Professional",
+    origin: "Warm medium-dark grain, hand-rubbed with beeswax and linseed oil",
+    swatch: "#5a3d28",
+    surfaceGradient:
+      "linear-gradient(135deg, #684730 0%, #4b311f 48%, #3a2416 100%)",
+    grainColor: "rgba(26, 14, 6, 0.32)",
+    inlayColor: "#e8dcc8",
+    accentColor: "#d4af63",
+    priceLabel: "KES 3,500",
+    planId: "solo",
+  },
+  {
+    id: "ebony" as const,
+    name: "Mpingo Ebony",
+    tier: "Atelier Edition",
+    origin: "Deep charcoal-black hardwood with high-contrast brass engraving",
+    swatch: "#1e1b18",
+    surfaceGradient:
+      "linear-gradient(135deg, #2b2723 0%, #191714 55%, #100e0c 100%)",
+    grainColor: "rgba(255, 255, 255, 0.07)",
+    inlayColor: "#d9b45b",
+    accentColor: "#d9b45b",
+    priceLabel: "KES 12,000",
+    planId: "collector",
+  },
+  {
+    id: "olive" as const,
+    name: "Rift Olive Wood",
+    tier: "Atelier Edition",
+    origin: "Golden honey tones with dramatic wild-growth figure from pruned trees",
+    swatch: "#9c7444",
+    surfaceGradient:
+      "linear-gradient(135deg, #b58952 0%, #8e6535 50%, #704d24 100%)",
+    grainColor: "rgba(56, 33, 12, 0.35)",
+    inlayColor: "#1a140e",
+    accentColor: "#12362a",
+    priceLabel: "KES 12,000",
+    planId: "collector",
+  },
+] as const;
+
+/** Sectors rather than borrowed logos. We never imply an endorsement we cannot verify. */
 export const sectors = [
   "Fintech",
-  "Legal",
+  "Commercial Law",
   "Hospitality",
-  "Creative studios",
-  "Consulting",
+  "Creative Studios",
+  "Management Consulting",
   "Universities",
-  "Health",
+  "Private Healthcare",
   "Logistics",
-  "Agriculture",
-  "Agencies",
-  "Real estate",
-  "NGOs",
+  "Agribusiness",
+  "Architecture",
+  "Real Estate",
+  "Climate & NGOs",
 ] as const;
 
 export const features = [
   {
     id: "nfc",
     icon: "nfc",
-    title: "Tap, don't talk",
-    body: "One tap against any modern phone and your profile is open — before you've finished saying hello. No app, no downloads, no fumbling for a card holder.",
+    title: "Tap, don't dictate",
+    body: "One tap against any modern phone opens your full profile before you finish saying hello. No app, no downloads, no fumbling for a card holder.",
     span: "lg:col-span-6",
     accent: true,
+    href: "/#showcase",
   },
   {
     id: "qr",
     icon: "qr",
-    title: "QR on the back",
-    body: "Every card carries a printed QR code, so older phones and printed materials still work perfectly.",
+    title: "Engraved QR on the reverse",
+    body: "Every Alama carries a precision QR code on the back so older phones, laptops, and conference badges scan effortlessly.",
     span: "lg:col-span-6",
+    href: "/#studio",
   },
   {
     id: "live",
     icon: "pencil",
-    title: "Edit once, live forever",
-    body: "Promoted? Moved? New number? Update your profile in the dashboard and every card you've ever handed out is instantly current.",
+    title: "Edit once, current forever",
+    body: "Promoted? New office? New pitch deck? Update your dashboard in seconds and every introduction you have ever made stays up to date.",
     span: "lg:col-span-4",
+    href: "/p/wanjiru",
   },
   {
     id: "contact",
     icon: "contact",
-    title: "One tap to save",
-    body: "Recipients save your full contact record — photo, numbers, WhatsApp, links — straight into their phone book.",
+    title: "Leave real value behind",
+    body: "Recipients save your vCard, portrait, WhatsApp, and downloadable briefs straight into their phone book with one press.",
     span: "lg:col-span-4",
+    href: "/p/wanjiru",
   },
   {
     id: "analytics",
     icon: "chart",
-    title: "Know what happens next",
-    body: "See taps, QR scans, contact saves and link clicks. Find out which room, and which card, actually opens doors.",
+    title: "Know which room converts",
+    body: "Track taps, QR scans, contact saves, and document downloads. See which meetings and events turn into real follow-ups.",
     span: "lg:col-span-4",
+    href: "/#showcase",
   },
   {
     id: "scanner",
     icon: "scan",
     title: "AI paper-card scanner",
-    body: "Photograph a traditional card and Kadi extracts the name, company and numbers into your contacts. Nothing gets lost in a drawer again.",
+    body: "Photograph any traditional paper card you receive and Alama extracts the name, role, company, and numbers into your searchable contacts.",
     span: "lg:col-span-6",
+    href: "/#pricing",
   },
   {
     id: "pwa",
     icon: "offline",
-    title: "Your card, on your home screen",
-    body: "Install Kadi as an app and share your QR from the lock screen — with your profile cached for the moments the network isn't.",
+    title: "Your mark on your lock screen",
+    body: "Install Alama as a lightweight web app with your QR and vCard cached locally for boardrooms and flights with weak signal.",
     span: "lg:col-span-6",
+    href: "/p/wanjiru",
   },
 ] as const;
 
 export const steps = [
   {
     number: "01",
-    title: "Order your card",
-    body: "Choose a finish, pay with M-Pesa or card, and we hand-finish and dispatch from Nairobi within 48 hours.",
-    detail: "Delivery countrywide in 2–4 days",
+    title: "Craft your physical mark",
+    body: "Choose Walnut, Ebony, or Olive wood, preview your engraving, and pay via M-Pesa or card. We hand-finish and dispatch from Nairobi within 48 hours.",
+    detail: "Delivery countrywide in 2 to 4 days",
   },
   {
     number: "02",
-    title: "Build your profile",
-    body: "Add your photo, role, company, WhatsApp, website and socials. Pick your colours. Publish in about four minutes.",
+    title: "Curate the value you share",
+    body: "Add your portrait, role, WhatsApp, booking link, and key documents. Tailor what visitors receive when they meet you in about four minutes.",
     detail: "Live preview while you edit",
   },
   {
     number: "03",
-    title: "Tap and be remembered",
-    body: "Hold your Kadi to a phone. Your profile opens instantly, and your new contact has everything they need to follow up.",
-    detail: "Works offline via printed QR",
+    title: "Tap and leave a lasting imprint",
+    body: "Hold your Alama to their phone. Your profile opens immediately, giving your new connection everything they need to remember and act.",
+    detail: "Works offline via reverse QR",
   },
 ] as const;
 
 export const benefits = [
   {
-    title: "You never run out of cards",
-    body: "One card, unlimited introductions. No reprints when you change role, number or company — just edit and publish.",
+    title: "You never run out of introductions",
+    body: "One hardwood card serves unlimited meetings. No reprints when you change title, number, or firm. Simply edit and publish.",
   },
   {
-    title: "You are remembered",
-    body: "A wooden card is kept. Paper cards go in a drawer. Your tap lands in their phone, with a photo attached to the name.",
+    title: "You give value in the first second",
+    body: "A paper card gives someone data entry. An Alama gives them your direct WhatsApp, your portfolio, your calendar link, and your photo saved to their contacts.",
   },
   {
-    title: "You follow up with context",
-    body: "Every tap is logged, so you know who opened your card and what they were interested in before the call.",
+    title: "You follow up with clear context",
+    body: "Every tap and link click is logged privately, so you know which document or service caught their attention before your next call.",
   },
   {
-    title: "You don't need a budget line",
-    body: "Reprinting 500 paper cards costs more than one Kadi — and every Kadi plants trees back home.",
+    title: "You replace waste with indigenous forest",
+    body: "Reprinting 500 paper cards costs more than one Alama, and every Alama funds audited indigenous tree planting in Kenya.",
   },
 ] as const;
 
 export const teamBenefits = [
-  "Branded profiles with your company colours and logo",
-  "Bulk ordering and per-seat card assignment",
-  "Central admin — add or remove team members in seconds",
-  "Organisation-wide analytics on one dashboard",
-  "Consistent identity across the whole client-facing team",
+  "Branded profiles with your firm colours, logo, and shared pitch documents",
+  "Bulk ordering with laser-etched company crests and per-seat assignment",
+  "Central admin to onboard or reassign team members in seconds",
+  "Organisation-wide tap and conversion analytics on one dashboard",
+  "Consistent executive presence across every client-facing partner",
 ] as const;
 
 export const testimonials = [
   {
     quote:
-      "I hand out one card at every pitch. Clients tap it, save me, and message on WhatsApp before I've left the building. My callback rate has genuinely doubled.",
+      "I carry one Alama to every client pitch. Opposing counsel and founders tap it, save my vCard, and download our firm brief before I leave the boardroom. My callback rate has genuinely doubled.",
     name: "Wanjiru Kamau",
     role: "Partner, Commercial Litigation",
     company: "Nairobi",
@@ -177,7 +266,7 @@ export const testimonials = [
   },
   {
     quote:
-      "We replaced six hundred paper cards a year with Kadis for the whole business development team. The admin side is what sold our finance director.",
+      "We replaced six hundred paper cards a year with Alama cards for our entire business development team. Giving clients instant access to our product deck on tap is what sold our directors.",
     name: "Otieno Odhiambo",
     role: "Head of Business Development",
     company: "Fintech, Westlands",
@@ -185,9 +274,9 @@ export const testimonials = [
   },
   {
     quote:
-      "The card itself is beautiful — people keep it on their desk. But the part that changed my work is the scanner: a decade of paper cards is now a searchable address book.",
+      "The olive wood finish is a genuine craft piece that people ask to hold. And the AI scanner turned a decade of loose paper cards in my desk into a clean, searchable address book.",
     name: "Aisha Mohamed",
-    role: "Independent Consultant",
+    role: "Principal Advisory Consultant",
     company: "Mombasa",
     initials: "AM",
   },
@@ -213,36 +302,36 @@ export const individualPlans: Plan[] = [
     name: "Solo",
     price: "KES 3,500",
     period: "one-time",
-    note: "One wooden NFC card · free lifetime profile",
-    summary: "For the professional who meets people for a living.",
+    note: "One Highland Walnut NFC card · free lifetime profile",
+    summary: "For the independent professional who wants every meeting to count.",
     features: [
-      "Hand-finished walnut NFC card",
-      "Unlimited profile edits, forever",
-      "QR code on the reverse",
-      "vCard download & WhatsApp share",
-      "Basic tap & scan analytics",
+      "Hand-finished Highland Walnut NFC card",
+      "Unlimited profile edits for life",
+      "Precision QR code on the reverse",
+      "One-tap vCard save & WhatsApp action",
+      "Core tap & scan analytics",
       "Nairobi dispatch in 48 hours",
     ],
-    cta: "Order a Kadi",
-    href: "#cta",
+    cta: "Order Solo",
+    href: "/#cta",
   },
   {
     id: "professional",
     name: "Professional",
     price: "KES 6,500",
     period: "one-time",
-    note: "Two cards + AI paper-card scanner",
-    summary: "For founders, consultants and anyone always closing.",
+    note: "Two cards + AI paper-card scanner + custom engraving",
+    summary: "For founders, partners, and consultants who share decks and close deals.",
     features: [
       "Everything in Solo, plus a spare card",
-      "AI paper-card scanner (12 months)",
-      "Custom profile theme & brand colours",
-      "Documents, portfolio & booking links",
-      "Advanced analytics with link-level detail",
-      "Priority WhatsApp support",
+      "Custom laser-etched name & role on wood",
+      "AI paper-card scanner (12 months included)",
+      "Share PDF briefs, portfolio & booking links",
+      "Advanced link-level conversion analytics",
+      "Priority WhatsApp concierge support",
     ],
     cta: "Order Professional",
-    href: "#cta",
+    href: "/#cta",
     featured: true,
     badge: "Most chosen",
   },
@@ -251,18 +340,18 @@ export const individualPlans: Plan[] = [
     name: "Atelier",
     price: "KES 12,000",
     period: "one-time",
-    note: "Limited batch, laser-etched detail",
-    summary: "For those who treat a first impression as a craft.",
+    note: "Mpingo Ebony or Rift Olive Wood · brass QR inlay",
+    summary: "For executives who treat a first impression as an enduring craft.",
     features: [
       "Everything in Professional",
-      "Hand-oiled ebony or olive wood finish",
-      "Custom laser-etched name or monogram",
-      "Presentation box & desk stand",
-      "Engraved brass QR plate",
-      "Lifetime AI scanner access",
+      "Hand-oiled Mpingo Ebony or Rift Olive finish",
+      "Bespoke laser-etched crest or monogram",
+      "Engraved solid brass QR reverse plate",
+      "Hardwood desk stand & presentation box",
+      "Lifetime AI paper-card scanner access",
     ],
-    cta: "Request a finish",
-    href: "#cta",
+    cta: "Commission Atelier",
+    href: "/#cta",
   },
 ];
 
@@ -272,36 +361,36 @@ export const teamPlans: Plan[] = [
     name: "Team",
     price: "KES 28,000",
     period: "per 10 people",
-    note: "Branded wooden cards for your team",
-    summary: "A consistent front door for a growing client-facing team.",
+    note: "Branded wooden cards for your client-facing team",
+    summary: "A unified, high-trust introduction for growing firms and studios.",
     features: [
-      "10 wooden NFC cards, your logo etched",
-      "Organisation profile & member management",
-      "Bulk card assignment from one dashboard",
-      "Team analytics and reporting",
-      "Onboarding session for your admins",
-      "Dedicated account contact",
+      "10 Walnut NFC cards etched with your logo",
+      "Shared company resources & pitch deck links",
+      "Central member & card assignment dashboard",
+      "Team-wide tap and contact-save reporting",
+      "Guided onboarding session for your admin",
+      "Dedicated Nairobi account manager",
     ],
-    cta: "Talk to sales",
-    href: "#cta",
+    cta: "Configure Team Order",
+    href: "/#cta",
   },
   {
     id: "team-scale",
     name: "Scale",
     price: "KES 2,400",
     period: "per person",
-    note: "25 people and above, invoiced",
-    summary: "For firms standardising how the whole company introduces itself.",
+    note: "25 people and above, invoiced via LPO or card",
+    summary: "For established firms standardising how every department leaves its mark.",
     features: [
-      "Everything in Team, at volume pricing",
-      "Custom domain for every profile",
-      "SSO-ready organisation accounts",
-      "Quarterly identity & brand review",
-      "Finance-friendly invoicing and LPOs",
-      "Replacement cards at cost",
+      "Everything in Team at volume pricing",
+      "Custom domain routing for every profile",
+      "Role-based templates & instant offboarding",
+      "Quarterly brand & conversion review",
+      "Finance-ready invoicing and LPO support",
+      "At-cost replacement cards for new hires",
     ],
-    cta: "Book a walkthrough",
-    href: "#cta",
+    cta: "Book a Team Walkthrough",
+    href: "/#cta",
     featured: true,
     badge: "Best for firms",
   },
@@ -310,93 +399,155 @@ export const teamPlans: Plan[] = [
     name: "Enterprise",
     price: "Custom",
     period: "annual",
-    note: "Travel, events and multi-country teams",
-    summary: "For organisations issuing identity across borders and events.",
+    note: "Multi-country firms, banks, and executive summits",
+    summary: "For organisations issuing verified identity across borders and events.",
     features: [
       "Everything in Scale",
-      "Event & conference bulk issue",
-      "API access and data export",
-      "Security review & DPA support",
-      "Multiple brands under one account",
-      "Named success manager",
+      "Bespoke wood & brass co-branded editions",
+      "CRM export & webhook integrations",
+      "Data Protection Act (Kenya) & DPA review",
+      "Multi-subsidiary brand management",
+      "Named executive success lead",
     ],
-    cta: "Speak to our team",
-    href: "#cta",
+    cta: "Speak to Enterprise",
+    href: "/#cta",
   },
 ];
 
 export const faqs = [
   {
-    q: "Does the person receiving my card need an app?",
-    a: "No. Your Kadi holds a link, not your data. They tap the card with a phone and your profile opens in the browser they already use. Apple and Android devices from 2019 onwards handle this natively, with no setup on their side.",
+    q: "Does the person receiving my Alama need an app?",
+    a: "Never. Your Alama holds a secure pointer link, not raw personal files. When they tap the card with their phone, your profile opens immediately in Safari or Chrome. iPhones from 2018 onwards and almost all modern Android phones handle NFC taps natively.",
+  },
+  {
+    q: "How does Alama help me leave real value with a contact?",
+    a: "A paper card only transfers a phone number that someone has to type in later. Your Alama profile lets you attach high-value resources right under your name: a downloadable company capability statement, a calendar booking link, case studies, and a one-tap vCard save that includes your portrait so they always remember your face.",
   },
   {
     q: "What if their phone doesn't support NFC?",
-    a: "Every card has a printed QR code on the reverse that opens exactly the same profile. We also give you a shareable link and a downloadable QR you can drop into slides, email signatures or an event badge.",
+    a: "Every card carries a high-contrast QR code on the reverse that opens the exact same profile. You also get a downloadable SVG and PNG QR code in your dashboard for presentation slides, email signatures, and event lanyards.",
   },
   {
-    q: "What happens if I change jobs or phone numbers?",
-    a: "You edit your profile in the Kadi dashboard and hit publish. That is the whole process. The card in someone's wallet keeps working, and it is already showing your new details — no reprint, no mailing cards back.",
+    q: "What happens when I change roles, firms, or phone numbers?",
+    a: "You update your details in the Alama dashboard and press publish. Every card you carry, and every link you have ever shared, reflects your new details immediately without reprinting a single piece of wood.",
   },
   {
-    q: "Can I really never run out of cards?",
-    a: "One card covers unlimited introductions. People tap it, they save your details to their own phone. Ordering a second card is about having a spare and a different finish, not because the first one ran dry.",
+    q: "Is my personal information exposed to the public?",
+    a: "Only the fields you choose to switch on. You control visibility per field (for example, showing your work WhatsApp and hiding your personal email), and the NFC chip itself only stores your profile URL.",
   },
   {
-    q: "Is my personal information public?",
-    a: "Only what you switch on. Your dashboard controls each field individually, and profiles are unlisted by default until you publish them. The card's chip stores a URL, never your phone number, email or ID.",
-  },
-  {
-    q: "How does the environmental commitment work?",
-    a: "More than half of every payment is directed into reforestation partners planting indigenous trees in Kenya. You get a certificate with your order and an impact record in your dashboard, so the number is yours to check, not just a claim on a website.",
+    q: "How does the 55% reforestation commitment work?",
+    a: "Over half of every order goes directly to indigenous tree planting partners across Kenyan counties. Every order generates a verifiable planting record in your dashboard showing the partner nursery and county supported by your card.",
   },
   {
     q: "Which payment methods do you accept?",
-    a: "M-Pesa for Kenyan customers, with card payments for international orders. Team and enterprise orders can be invoiced against an LPO.",
+    a: "We accept M-Pesa and bank cards for instant checkout. Corporate and team orders can also be settled via formal invoice and Local Purchase Order (LPO).",
   },
   {
-    q: "Can I use Kadi offline?",
-    a: "You can install your Kadi as a web app with your profile and QR cached for low-signal moments. Tap-to-open still needs a connection the first time a recipient loads it, because the profile lives online — that is what lets you edit it forever.",
+    q: "Can I share my Alama when network signal is weak?",
+    a: "Yes. You can save your Alama pass to your phone home screen with your QR code and vCard cached offline, ensuring you can still share your contact details in basement boardrooms or on flights.",
   },
 ] as const;
 
 export const impact = {
   eyebrow: "Impact, measured",
   heading: "More than half of every shilling grows something.",
-  body: "Wood, not plastic. Indigenous seedlings, not quick-growing exotics. Every Kadi payment directs over 50% into reforestation work with Kenyan planting partners, and your dashboard shows the trees attached to your card — because a claim you can audit is worth more than a badge on a website.",
+  body: "Hardwood, not PVC plastic. Indigenous seedlings, not fast-growing exotics. Every Alama order directs 55% of revenue into reforestation work with Kenyan planting partners, and your dashboard records the trees tied to your card because an audited commitment matters more than a slogan.",
   stats: [
     { value: "55%", label: "of revenue to reforestation" },
-    { value: "41,600", label: "seedlings planted to date" },
+    { value: "41,600", label: "indigenous seedlings planted" },
     { value: "126", label: "partner growers in 11 counties" },
-    { value: "0", label: "grams of PVC per card" },
+    { value: "0", label: "grams of PVC plastic per card" },
   ],
 } as const;
 
 export const showcase = {
   eyebrow: "The digital identity",
-  heading: "A profile that does the remembering for you.",
-  body: "Your tap opens one page: who you are, where you work, and every way to reach you. Visitors can save you as a contact in one press, message you on WhatsApp, or download your company profile — all without an account.",
+  heading: "An introduction that does the remembering for you.",
+  body: "Your tap opens a tailored page built around who you are and the value you bring. Visitors can save your contact with your portrait in one press, message you on WhatsApp, or download your firm profile without creating an account.",
   tabs: [
     {
       id: "tap",
       label: "NFC tap",
       title: "One tap, zero typing",
-      body: "Hold the card near the top of any phone. The profile opens in the default browser in under a second. The chip only stores the link, which is why your details can change forever without touching the card.",
-      points: ["No app on either side", "Works on iOS 13+ and Android 5+", "Chip stores a URL, never your data"],
+      body: "Hold your Alama near the top of any phone. Your profile opens in the default browser in under a second. Because the chip stores a pointer link, you can evolve your profile forever without replacing the card.",
+      points: [
+        "No app required on either side",
+        "Native on iOS and Android",
+        "Chip stores a secure URL, never raw private data",
+      ],
     },
     {
       id: "qr",
-      label: "QR fallback",
-      title: "A QR that matches your card",
-      body: "Printed on the reverse in a finish that survives a wallet. Recipients scan with the camera they already have, and you can download the same code as PNG or SVG for decks, badges and signage.",
-      points: ["High-resolution PNG & SVG export", "Tracked separately from taps", "Never expires, never reprints"],
+      label: "Reverse QR",
+      title: "Precision QR on wood or brass",
+      body: "Etched on the reverse side to survive years in a pocket or cardholder. Recipients scan with their camera, and you can export matching SVG or PNG codes for decks and event badges.",
+      points: [
+        "Crisp vector SVG & PNG export",
+        "Analytics tracked separately from NFC taps",
+        "Scan the live code here to test /p/wanjiru",
+      ],
     },
     {
       id: "profile",
-      label: "Live profile",
-      title: "Everything they need, in order",
-      body: "Photo, role, company and location at the top. Then call, WhatsApp and email. Then socials, portfolio, documents and booking links. All editable from your dashboard, reflected instantly.",
-      points: ["Save-to-contacts on every profile", "Privacy controls per field", "Loads in under a second"],
+      label: "Value & privacy",
+      title: "Share what matters, guard what is private",
+      body: "Lead with your portrait, title, firm, and direct contact actions. Below that, leave tangible value: downloadable briefs, booking links, and portfolio highlights, with granular privacy toggles per field.",
+      points: [
+        "One-tap vCard download with portrait",
+        "Attach briefs, decks, and booking links",
+        "Field-level privacy controls",
+      ],
     },
+  ],
+} as const;
+
+export const demoProfile = {
+  slug: "wanjiru",
+  name: "Wanjiru Kamau",
+  Honorific: "Advocate of the High Court of Kenya",
+  role: "Partner, Commercial Litigation",
+  company: "Kamau & Waweru Advocates",
+  location: "Upper Hill, Nairobi",
+  bio: "Advising East African founders, fintechs, and cross-border investors on commercial dispute resolution, regulatory licensing, and corporate governance.",
+  phone: "+254 712 345 678",
+  phoneRaw: "+254712345678",
+  whatsapp: "254712345678",
+  email: "wanjiru@kamauwaweru.co.ke",
+  website: "https://kamauwaweru.co.ke",
+  websiteLabel: "kamauwaweru.co.ke",
+  portrait: "/images/portrait.webp",
+  cardFinish: "Mpingo Ebony · Atelier Edition",
+  treesPlanted: 14,
+  countySupported: "Nyeri & Kiambu Counties",
+  resources: [
+    {
+      title: "2026 East Africa Fintech & Commercial Dispute Guide",
+      subtitle: "PDF Brief · 12 pages · Free client resource",
+      tag: "Brief",
+      actionLabel: "Read summary",
+      summary:
+        "Key contractual safeguards, arbitration clauses, and CBK regulatory checkpoints for East African growth companies in 2026.",
+    },
+    {
+      title: "Book a 20-Minute Initial Consultation",
+      subtitle: "Direct calendar access for new matters",
+      tag: "Calendar",
+      actionLabel: "Request slot",
+      summary:
+        "Select a morning or afternoon slot for an introductory conflict check and matter scoping call with Wanjiru's chambers.",
+    },
+    {
+      title: "Kamau & Waweru Practice Credentials",
+      subtitle: "Chambers Global & Legal 500 overview",
+      tag: "Credentials",
+      actionLabel: "View practice",
+      summary:
+        "Ranked Tier 1 in Commercial Litigation and Cross-Border Arbitration across Kenya, Uganda, and Tanzania.",
+    },
+  ],
+  socials: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/" },
+    { label: "Practice Website", href: "https://kamauwaweru.co.ke" },
   ],
 } as const;

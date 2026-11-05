@@ -43,7 +43,7 @@ function Counter({ value, label }: { value: string; label: string }) {
         <span className="block text-display text-[clamp(1.75rem,4vw,2.6rem)] text-paper tabular-nums">
           {display}
         </span>
-        <span className="mt-1.5 block max-w-[16ch] text-[0.6875rem] leading-snug text-paper/55">
+        <span className="mt-1.5 block max-w-[16ch] text-[0.75rem] leading-snug text-paper/70">
           {label}
         </span>
       </dd>
@@ -52,9 +52,21 @@ function Counter({ value, label }: { value: string; label: string }) {
 }
 
 const pillars = [
-  { icon: TreePine, title: "Indigenous species", body: "Partner nurseries grow local species suited to each county's soil, not fast exotics." },
-  { icon: Users, title: "Paid grower network", body: "126 partner growers are paid per surviving seedling — stewardship, not charity." },
-  { icon: Recycle, title: "Zero PVC", body: "Wood, brass and recycled packaging. No plastic laminate, no throwaway sleeves." },
+  {
+    icon: TreePine,
+    title: "Indigenous species",
+    body: "Partner nurseries grow native species suited to each county's soil, never invasive fast exotics.",
+  },
+  {
+    icon: Users,
+    title: "Paid grower network",
+    body: "126 partner growers are paid per surviving seedling, creating long-term stewardship rather than one-off charity.",
+  },
+  {
+    icon: Recycle,
+    title: "Zero PVC plastic",
+    body: "Hardwood, brass, and recycled packaging. No plastic laminate and no throwaway vinyl sleeves.",
+  },
 ] as const;
 
 export function Impact() {
@@ -87,11 +99,11 @@ export function Impact() {
                 More than half of every{" "}
                 <span className="italic text-brass">shilling grows something.</span>
               </h2>
-              <p className="mt-5 max-w-[46ch] text-[0.9375rem] leading-relaxed text-paper/62">
+              <p className="mt-5 max-w-[46ch] text-[0.9375rem] leading-relaxed text-paper/75">
                 {impact.body}
               </p>
               <div className="mt-7">
-                <TextLink href="#faq" className="text-paper/80 decoration-paper/30 hover:decoration-brass">
+                <TextLink href="/#faq" className="text-paper/85 decoration-paper/35 hover:decoration-brass">
                   Read how the commitment is audited
                 </TextLink>
               </div>
@@ -100,10 +112,10 @@ export function Impact() {
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {pillars.map(({ icon: Icon, title, body }, i) => (
                 <Reveal key={title} delay={0.06 * i}>
-                  <div className="rounded-xl border border-paper/10 bg-paper/[0.035] p-4 backdrop-blur-sm">
+                  <div className="rounded-xl border border-paper/12 bg-paper/[0.045] p-4 backdrop-blur-sm">
                     <Icon className="size-4 text-moss" aria-hidden="true" />
-                    <h3 className="mt-2.5 text-[0.8125rem] font-semibold text-paper/90">{title}</h3>
-                    <p className="mt-1.5 text-[0.6875rem] leading-relaxed text-paper/55">{body}</p>
+                    <h3 className="mt-2.5 text-[0.8125rem] font-semibold text-paper">{title}</h3>
+                    <p className="mt-1.5 text-[0.75rem] leading-relaxed text-paper/70">{body}</p>
                   </div>
                 </Reveal>
               ))}
@@ -113,7 +125,7 @@ export function Impact() {
           <Reveal delay={0.12}>
             <div className="glass-dark relative overflow-hidden rounded-2xl p-6 sm:p-8">
               <div className="flex items-center justify-between">
-                <span className="eyebrow text-[0.625rem] text-brass">Impact ledger · 2025</span>
+                <span className="eyebrow text-[0.6875rem] text-brass">Impact ledger · 2026</span>
                 <Sprout className="size-4 text-moss" aria-hidden="true" />
               </div>
 
@@ -123,12 +135,12 @@ export function Impact() {
                 ))}
               </dl>
 
-              <div className="mt-8 border-t border-paper/10 pt-5">
-                <div className="flex items-baseline justify-between text-[0.6875rem] text-paper/55">
+              <div className="mt-8 border-t border-paper/12 pt-5">
+                <div className="flex items-baseline justify-between text-[0.75rem] text-paper/75">
                   <span>Revenue directed to planting</span>
-                  <span className="font-medium text-paper/75">55%</span>
+                  <span className="font-semibold text-paper">55%</span>
                 </div>
-                <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-paper/10">
+                <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-paper/12">
                   <motion.div
                     className="h-full rounded-full bg-gradient-to-r from-moss via-brass to-clay-soft"
                     initial={reduce ? { width: "55%" } : { width: 0 }}
@@ -137,8 +149,8 @@ export function Impact() {
                     transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                   />
                 </div>
-                <p className="mt-3 text-[0.625rem] leading-relaxed text-paper/55">
-                  Figures illustrative of programme reporting; planting certificates are
+                <p className="mt-3 text-[0.6875rem] leading-relaxed text-paper/70">
+                  Figures illustrative of programme reporting. Planting certificates are
                   issued per order and recorded in your dashboard.
                 </p>
               </div>

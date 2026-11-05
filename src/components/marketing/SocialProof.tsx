@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/ui/Reveal";
-import { sectors } from "@/lib/site";
+import { sectors, site } from "@/lib/site";
 
 function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
@@ -13,9 +13,9 @@ function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
       {sectors.map((s) => (
         <li
           key={s}
-          className="flex shrink-0 items-center gap-3 text-[0.9375rem] font-medium tracking-[-0.01em] whitespace-nowrap text-ink/60 transition-colors duration-500 hover:text-ink/70"
+          className="flex shrink-0 items-center gap-3 text-[0.9375rem] font-medium tracking-[-0.01em] whitespace-nowrap text-ink/70 transition-colors duration-500 hover:text-ink"
         >
-          <span className="size-1 rotate-45 bg-clay/40" aria-hidden="true" />
+          <span className="size-1.5 rotate-45 bg-clay/55" aria-hidden="true" />
           {s}
         </li>
       ))}
@@ -31,11 +31,11 @@ export function SocialProof() {
       <div className="container-x">
         <Reveal>
           <div className="flex flex-col items-center gap-2 text-center">
-            <p id="proof-heading" className="eyebrow text-ink/60">
-              Carried by people who meet people
+            <p id="proof-heading" className="eyebrow text-ink/70">
+              Carried by people whose introductions matter
             </p>
-            <p className="text-[0.8125rem] text-ink/60">
-              Lawyers, founders, hoteliers, consultants and creative studios across East Africa.
+            <p className="text-[0.8125rem] text-ink/70">
+              Advocates, founders, hoteliers, consultants, and creative studios across East Africa.
             </p>
           </div>
         </Reveal>
@@ -44,7 +44,7 @@ export function SocialProof() {
       <div
         className="group relative mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_9%,black_91%,transparent)]"
         role="group"
-        aria-label="Sectors using Kadi"
+        aria-label={`Sectors using ${site.name}`}
       >
         <div
           className={

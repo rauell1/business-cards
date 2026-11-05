@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState, type ReactNode } from "react";
 import {
@@ -14,10 +15,13 @@ import {
   MapPin,
   Download,
   Check,
+  ArrowUpRight,
+  FileText,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { showcase, site } from "@/lib/site";
+import { demoProfile, showcase, site } from "@/lib/site";
+import { downloadDemoVCard } from "@/lib/vcard";
 import { cn } from "@/lib/cn";
 
 const icons = { tap: Nfc, qr: QrCode, profile: IdCard } as const;
@@ -48,7 +52,7 @@ export function Showcase({ qr }: { qr: ReactNode }) {
                 eyebrow={showcase.eyebrow}
                 title={
                   <>
-                    A profile that does the{" "}
+                    An introduction that does the{" "}
                     <span className="italic text-forest">remembering</span> for you.
                   </>
                 }
@@ -60,7 +64,7 @@ export function Showcase({ qr }: { qr: ReactNode }) {
               role="tablist"
               aria-label="Profile surfaces"
               aria-orientation="horizontal"
-              className="mt-8 flex flex-wrap gap-1.5 rounded-full border border-ink/8 bg-white/50 p-1.5 backdrop-blur-md"
+              className="mt-8 flex flex-wrap gap-1.5 rounded-full border border-ink/10 bg-white/60 p-1.5 backdrop-blur-md"
             >
               {showcase.tabs.map((t) => {
                 const Icon = icons[t.id as keyof typeof icons];
@@ -89,7 +93,7 @@ export function Showcase({ qr }: { qr: ReactNode }) {
                     }}
                     className={cn(
                       "relative inline-flex flex-1 items-center justify-center gap-2 rounded-full px-3.5 py-2 text-[0.8125rem] font-medium transition-colors duration-300",
-                      selected ? "text-paper" : "text-ink/60 hover:text-ink",
+                      selected ? "text-paper" : "text-ink/70 hover:text-ink",
                     )}
                   >
                     {selected && (
@@ -111,7 +115,7 @@ export function Showcase({ qr }: { qr: ReactNode }) {
               id={`panel-${tab}`}
               aria-labelledby={`tab-${tab}`}
               tabIndex={0}
-              className="mt-7 min-h-[13.5rem] rounded-2xl focus-visible:outline-offset-4"
+              className="mt-7 min-h-[14rem] rounded-2xl focus-visible:outline-offset-4"
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -124,12 +128,12 @@ export function Showcase({ qr }: { qr: ReactNode }) {
                   <h3 className="text-[1.25rem] font-semibold tracking-[-0.025em] text-ink">
                     {current.title}
                   </h3>
-                  <p className="mt-2.5 max-w-[48ch] text-[0.9375rem] leading-relaxed text-ink/60">
+                  <p className="mt-2.5 max-w-[48ch] text-[0.9375rem] leading-relaxed text-ink/70">
                     {current.body}
                   </p>
                   <ul className="mt-5 space-y-2.5">
                     {current.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 text-[0.875rem] text-ink/70">
+                      <li key={p} className="flex items-start gap-2.5 text-[0.875rem] text-ink/75">
                         <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-moss/15">
                           <Check className="size-2.5 text-forest" aria-hidden="true" />
                         </span>
@@ -137,14 +141,23 @@ export function Showcase({ qr }: { qr: ReactNode }) {
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-5">
+                    <Link
+                      href="/p/wanjiru"
+                      className="inline-flex items-center gap-1.5 text-[0.8125rem] font-semibold text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest"
+                    >
+                      Open full interactive profile (/p/wanjiru)
+                      <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                    </Link>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
 
-          {/* Phone mock */}
+          {/* Phone mock with consistent height across all three tabs */}
           <Reveal delay={0.1} className="lg:order-2">
-            <div className="relative mx-auto w-full max-w-[21rem]">
+            <div className="relative mx-auto w-full max-w-[21.5rem]">
               <div
                 aria-hidden="true"
                 className="absolute -inset-8 -z-10 rounded-[50%] bg-[radial-gradient(circle_at_center,rgba(18,54,42,0.16),transparent_70%)] blur-2xl"
@@ -154,27 +167,28 @@ export function Showcase({ qr }: { qr: ReactNode }) {
                 <div className="relative overflow-hidden rounded-[1.9rem] bg-paper">
                   {/* status bar */}
                   <div className="relative flex h-9 items-center justify-between px-5 pt-2">
-                    <span className="text-[0.625rem] font-semibold text-ink/70">9:41</span>
+                    <span className="text-[0.6875rem] font-semibold text-ink/75">9:41</span>
                     <span
-                      className="absolute left-1/2 top-1.5 h-4 w-16 -translate-x-1/2 rounded-full bg-ink"
+                      className="absolute top-1.5 left-1/2 h-4 w-16 -translate-x-1/2 rounded-full bg-ink"
                       aria-hidden="true"
                     />
                     <span className="flex items-center gap-1" aria-hidden="true">
-                      <span className="h-1.5 w-1 rounded-sm bg-ink/60" />
-                      <span className="h-2 w-1 rounded-sm bg-ink/60" />
-                      <span className="h-2.5 w-1 rounded-sm bg-ink/60" />
-                      <span className="ml-1 h-2 w-3.5 rounded-[2px] border border-ink/50" />
+                      <span className="h-1.5 w-1 rounded-sm bg-ink/65" />
+                      <span className="h-2 w-1 rounded-sm bg-ink/65" />
+                      <span className="h-2.5 w-1 rounded-sm bg-ink/65" />
+                      <span className="ml-1 h-2 w-3.5 rounded-[2px] border border-ink/55" />
                     </span>
                   </div>
 
-                  <div className="relative min-h-[24rem] px-4 pt-2 pb-6">
+                  <div className="relative flex min-h-[26.5rem] flex-col justify-between px-4 pt-2 pb-5">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={tab}
                         initial={reduce ? false : { opacity: 0, scale: 0.985, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={reduce ? undefined : { opacity: 0, scale: 0.99, y: -6 }}
-                        transition={{ duration: 0.42, ease: EASE }}
+                        transition={{ duration: 0.38, ease: EASE }}
+                        className="flex flex-1 flex-col justify-between"
                       >
                         {tab === "qr" ? (
                           <QrScreen qr={qr} />
@@ -191,7 +205,7 @@ export function Showcase({ qr }: { qr: ReactNode }) {
 
               {/* side caption */}
               <motion.div
-                className="glass absolute -right-4 bottom-16 hidden rounded-2xl px-3 py-2 text-[0.6875rem] font-medium text-ink/70 sm:block"
+                className="glass absolute -right-4 bottom-16 hidden rounded-2xl px-3 py-2 text-[0.6875rem] font-medium text-ink/80 sm:block"
                 initial={reduce ? false : { opacity: 0, x: 12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -209,10 +223,10 @@ export function Showcase({ qr }: { qr: ReactNode }) {
 }
 
 function SourceBadge({ kind }: { kind: "nfc" | "qr" | "link" }) {
-  const label = kind === "nfc" ? "Opened by NFC tap" : kind === "qr" ? "Opened by QR scan" : "Shared link";
+  const label = kind === "nfc" ? "Opened by NFC tap" : kind === "qr" ? "Opened by QR scan" : "Value & privacy";
   const Icon = kind === "nfc" ? Nfc : kind === "qr" ? QrCode : Globe;
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-moss/12 px-2.5 py-1 text-[0.625rem] font-semibold tracking-[0.06em] text-forest uppercase">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-moss/14 px-2.5 py-1 text-[0.6875rem] font-semibold tracking-[0.06em] text-forest uppercase">
       <Icon className="size-2.5" aria-hidden="true" />
       {label}
     </span>
@@ -220,61 +234,95 @@ function SourceBadge({ kind }: { kind: "nfc" | "qr" | "link" }) {
 }
 
 function TapScreen() {
+  const [saved, setSaved] = useState(false);
+
   return (
-    <div className="flex flex-col items-center pt-4 text-center">
-      <div className="relative">
-        <div className="absolute -inset-3 rounded-full bg-clay/15 blur-lg" aria-hidden="true" />
-        <Image
-          src="/images/portrait.webp"
-          alt=""
-          width={96}
-          height={96}
-          className="relative size-20 rounded-full object-cover ring-2 ring-white"
-        />
+    <div className="flex flex-1 flex-col items-center justify-between pt-2 text-center">
+      <div className="flex flex-col items-center">
+        <div className="relative">
+          <div className="absolute -inset-3 rounded-full bg-clay/15 blur-lg" aria-hidden="true" />
+          <Image
+            src={demoProfile.portrait}
+            alt={`Portrait of ${demoProfile.name}`}
+            width={96}
+            height={96}
+            className="relative size-18 rounded-full object-cover ring-2 ring-white"
+          />
+        </div>
+        <p className="mt-2.5 text-[1.0625rem] font-semibold tracking-[-0.02em] text-ink">
+          {demoProfile.name}
+        </p>
+        <p className="mt-0.5 text-[0.75rem] text-ink/70">Partner · Kamau &amp; Waweru</p>
+        <div className="mt-2.5">
+          <SourceBadge kind="nfc" />
+        </div>
       </div>
-      <p className="mt-3 text-[1.0625rem] font-semibold tracking-[-0.02em] text-ink">Wanjiru Kamau</p>
-      <p className="mt-0.5 text-[0.75rem] text-ink/60">Partner · Kamau &amp; Waweru</p>
-      <div className="mt-3">
-        <SourceBadge kind="nfc" />
-      </div>
-      <div className="mt-5 grid w-full gap-2">
+
+      <div className="mt-3 grid w-full gap-1.5">
         {[
-          { icon: Phone, label: "+254 712 345 678" },
-          { icon: Mail, label: "wanjiru@kamauwaweru.co.ke" },
-          { icon: MessageCircle, label: "WhatsApp" },
+          { icon: Phone, label: demoProfile.phone },
+          { icon: Mail, label: demoProfile.email },
+          { icon: MessageCircle, label: "Direct WhatsApp" },
         ].map(({ icon: Icon, label }) => (
           <div
             key={label}
-            className="flex items-center gap-2.5 rounded-xl border border-ink/8 bg-white/70 px-3 py-2.5 text-left text-[0.6875rem] text-ink/70"
+            className="flex items-center gap-2.5 rounded-xl border border-ink/8 bg-white/80 px-3 py-2 text-left text-[0.75rem] text-ink/75"
           >
             <Icon className="size-3.5 shrink-0 text-forest-400" aria-hidden="true" />
             <span className="truncate">{label}</span>
           </div>
         ))}
       </div>
-      <div className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl bg-forest py-2.5 text-[0.6875rem] font-medium text-paper">
-        <Download className="size-3" aria-hidden="true" />
-        Add to contacts
-      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          downloadDemoVCard();
+          setSaved(true);
+        }}
+        className={cn(
+          "mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-[0.75rem] font-medium transition-colors",
+          saved
+            ? "bg-moss/20 text-forest"
+            : "bg-forest text-paper hover:bg-forest-600",
+        )}
+      >
+        <Download className="size-3.5" aria-hidden="true" />
+        {saved ? "vCard downloaded" : "Save to contacts (.vcf)"}
+      </button>
     </div>
   );
 }
 
 function QrScreen({ qr }: { qr: ReactNode }) {
   return (
-    <div className="flex flex-col items-center pt-2 text-center">
+    <div className="flex flex-1 flex-col items-center justify-between pt-2 text-center">
       <SourceBadge kind="qr" />
-      <div className="mt-4 w-full rounded-2xl border border-ink/8 bg-white p-3.5 shadow-[0_14px_40px_-24px_rgba(16,32,26,0.5)]">
-        <div className="mx-auto aspect-square w-full max-w-[11rem]">{qr}</div>
+      <div className="mt-3 w-full rounded-2xl border border-ink/8 bg-white p-3.5 shadow-[0_14px_40px_-24px_rgba(16,32,26,0.5)]">
+        <div className="mx-auto aspect-square w-full max-w-[10.5rem]">{qr}</div>
       </div>
-      <p className="mt-3.5 text-[0.75rem] font-medium text-ink">Scan to open my card</p>
-      <p className="mt-1 text-[0.625rem] text-ink/60">{site.domain}/p/wanjiru</p>
-      <div className="mt-4 grid w-full grid-cols-2 gap-2 text-[0.625rem]">
-        <span className="rounded-lg border border-ink/8 bg-white/70 py-2 font-medium text-ink/65">PNG</span>
-        <span className="rounded-lg border border-ink/8 bg-white/70 py-2 font-medium text-ink/65">SVG</span>
+      <div>
+        <p className="mt-2.5 text-[0.8125rem] font-semibold text-ink">Scan to open live profile</p>
+        <p className="mt-0.5 font-mono text-[0.6875rem] text-forest">{site.domain}/p/wanjiru</p>
       </div>
-      <p className="mt-3 text-[0.625rem] leading-relaxed text-ink/60">
-        Real, scannable — this one resolves to the demo profile.
+      <div className="mt-3 grid w-full grid-cols-2 gap-2 text-[0.6875rem]">
+        <Link
+          href="/p/wanjiru"
+          className="inline-flex items-center justify-center gap-1 rounded-xl bg-forest py-2 font-medium text-paper hover:bg-forest-600"
+        >
+          Open profile
+          <ArrowUpRight className="size-3" aria-hidden="true" />
+        </Link>
+        <button
+          type="button"
+          onClick={() => downloadDemoVCard()}
+          className="rounded-xl border border-ink/12 bg-white/80 py-2 font-medium text-ink hover:border-forest"
+        >
+          Save .vcf
+        </button>
+      </div>
+      <p className="mt-2 text-[0.6875rem] leading-relaxed text-ink/70">
+        Real and scannable. Point your phone camera here to open the demo profile.
       </p>
     </div>
   );
@@ -282,39 +330,49 @@ function QrScreen({ qr }: { qr: ReactNode }) {
 
 function ProfileScreen() {
   const rows = [
-    { icon: MapPin, k: "Location", v: "Upper Hill, Nairobi" },
-    { icon: Globe, k: "Website", v: "kamauwaweru.co.ke" },
-    { icon: MessageCircle, k: "WhatsApp", v: "+254 712 345 678" },
+    { icon: MapPin, k: "Chambers", v: "Upper Hill, Nairobi" },
+    { icon: FileText, k: "Shared Brief", v: "2026 Commercial Dispute Guide (PDF)" },
+    { icon: Globe, k: "Practice", v: "kamauwaweru.co.ke" },
   ];
   return (
-    <div className="pt-1">
+    <div className="flex flex-1 flex-col justify-between pt-1">
       <div className="flex items-center justify-between">
-        <span className="text-[0.6rem] font-semibold tracking-[0.14em] text-ink/60 uppercase">
-          Digital card
+        <span className="text-[0.6875rem] font-semibold tracking-[0.12em] text-ink/70 uppercase">
+          {site.name} Profile
         </span>
         <SourceBadge kind="link" />
       </div>
-      <div className="mt-3 flex items-center gap-3 rounded-2xl border border-ink/8 bg-white/70 p-3">
-        <Image src="/images/portrait.webp" alt="" width={64} height={64} className="size-12 rounded-xl object-cover" />
+      <div className="mt-2.5 flex items-center gap-3 rounded-2xl border border-ink/8 bg-white/80 p-3">
+        <Image
+          src={demoProfile.portrait}
+          alt={`Portrait of ${demoProfile.name}`}
+          width={64}
+          height={64}
+          className="size-12 rounded-xl object-cover"
+        />
         <div className="min-w-0">
-          <p className="truncate text-[0.8125rem] font-semibold text-ink">Wanjiru Kamau</p>
-          <p className="truncate text-[0.625rem] text-ink/60">Commercial Litigation · Advocate</p>
+          <p className="truncate text-[0.875rem] font-semibold text-ink">{demoProfile.name}</p>
+          <p className="truncate text-[0.6875rem] text-ink/70">Commercial Litigation · Advocate</p>
         </div>
       </div>
       <div className="mt-2.5 space-y-1.5">
         {rows.map(({ icon: Icon, k, v }) => (
-          <div key={k} className="flex items-center gap-2.5 rounded-lg bg-white/50 px-2.5 py-2">
-            <Icon className="size-3 text-forest-400" aria-hidden="true" />
+          <div key={k} className="flex items-center gap-2.5 rounded-xl bg-white/70 px-3 py-2">
+            <Icon className="size-3.5 shrink-0 text-forest-400" aria-hidden="true" />
             <div className="min-w-0">
-              <p className="text-[0.5rem] tracking-[0.08em] text-ink/60 uppercase">{k}</p>
-              <p className="truncate text-[0.6875rem] text-ink/70">{v}</p>
+              <p className="text-[0.625rem] font-semibold tracking-[0.06em] text-ink/65 uppercase">{k}</p>
+              <p className="truncate text-[0.75rem] text-ink/80">{v}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-2.5 rounded-xl border border-dashed border-moss/40 bg-moss/6 px-2.5 py-2">
-        <p className="text-[0.5rem] tracking-[0.08em] text-forest/50 uppercase">Private field · hidden</p>
-        <p className="mt-0.5 text-[0.625rem] text-ink/60">Personal email is not shown on your public profile.</p>
+      <div className="mt-2.5 rounded-xl border border-dashed border-moss/45 bg-moss/8 px-3 py-2.5">
+        <p className="text-[0.625rem] font-semibold tracking-[0.08em] text-forest uppercase">
+          Private field · hidden
+        </p>
+        <p className="mt-0.5 text-[0.6875rem] text-ink/70">
+          Personal number &amp; private email remain hidden from public visitors.
+        </p>
       </div>
     </div>
   );

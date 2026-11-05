@@ -1,7 +1,8 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Wordmark: a leaf inside a rounded square — the card, and the commitment.
+ * Brand mark for Alama: an etched leaf and seal dot inside a rounded hardwood
+ * square, representing both a lasting personal imprint and the reforestation commitment.
  * Pure SVG so it stays crisp at any size and inherits currentColor.
  */
 export function Logo({ className }: { className?: string }) {

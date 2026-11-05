@@ -5,7 +5,7 @@
 ```
                  ┌──────────────────────────────────────────────┐
    Physical      │  Wooden NFC card  ──stores only──▶ https://   │
-   layer         │  QR printed reverse              kadi.africa/p/username
+   layer         │  QR printed reverse              alama.africa/p/username
                  └──────────────────────────────────────────────┘
                                       │ tap / scan
                                       ▼
@@ -35,7 +35,7 @@ takes a customer's digital identity with it.
 | Layer | Responsibility |
 |---|---|
 | `app/` | Routing, layouts, server components, route handlers |
-| `components/` | Presentation only — no data access |
+| `components/` | Presentation only - no data access |
 | `server/services/` | Business rules; transaction boundaries |
 | `server/repositories/` | Drizzle queries; the only place SQL lives |
 | `lib/` | Pure helpers: validation, vCard, QR, formatting |
@@ -49,7 +49,7 @@ Authorization is enforced inside the service layer, never only in the UI.
 
 `/p/[username]` is cached at the edge with a tag per profile. Publishing a profile
 calls `revalidateTag('profile:<id>')`. Fallback path when Redis is unavailable:
-serve from Postgres and accept higher latency — cache is an optimization, never a
+serve from Postgres and accept higher latency - cache is an optimization, never a
 correctness dependency.
 
 ## Event model

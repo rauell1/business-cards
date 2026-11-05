@@ -102,7 +102,7 @@
   }
 }
 
-/* Refined glassmorphism — light, not frosted plastic */
+/* Refined glassmorphism: light, not frosted plastic */
 @utility glass {
   background: color-mix(in oklab, #ffffff 55%, transparent);
   backdrop-filter: blur(20px) saturate(1.4);

@@ -1,19 +1,78 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 import { MessageCircle, Mail, MapPin, Clock } from "lucide-react";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { site } from "@/lib/site";
 
-const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-  "Team Kadi enquiry",
-)}&body=${encodeURIComponent(
-  "Hi Kadi team,\n\nWe would like to order cards for our team.\n\nCompany:\nTeam size:\nTimeline:\n\nThank you.",
-)}`;
+const planOptions = [
+  "Solo (KES 3,500)",
+  "Professional (KES 6,500)",
+  "Atelier (KES 12,000)",
+  "Team (KES 28,000 / 10 cards)",
+  "Scale (KES 2,400/person)",
+  "Enterprise (Custom)",
+] as const;
+
+const finishOptions = [
+  "Highland Walnut",
+  "Mpingo Ebony",
+  "Rift Olive Wood",
+] as const;
 
 export function FinalCta() {
   const reduce = useReducedMotion();
+  const [selectedPlan, setSelectedPlan] = useState<string>("Professional (KES 6,500)");
+  const [selectedFinish, setSelectedFinish] = useState<string>("Highland Walnut");
+  const [engraving, setEngraving] = useState<string>("");
+
+  useEffect(() => {
+    const onSelect = (e: Event) => {
+      const detail = (e as CustomEvent).detail as {
+        plan?: string;
+        finish?: string;
+        engravingName?: string;
+        engravingRole?: string;
+        teamSize?: number;
+      };
+      if (detail?.plan) setSelectedPlan(detail.plan);
+      if (detail?.finish) setSelectedFinish(detail.finish);
+      if (detail?.engravingName) {
+        setEngraving(
+          detail.engravingRole
+            ? `${detail.engravingName} · ${detail.engravingRole}`
+            : detail.engravingName,
+        );
+      } else if (detail?.teamSize) {
+        setEngraving(`Team of ${detail.teamSize} people`);
+      }
+    };
+    window.addEventListener("alama:select-order", onSelect);
+    return () => window.removeEventListener("alama:select-order", onSelect);
+  }, []);
+
+  const whatsappMessage = [
+    `Hi ${site.name}! I would like to commission an ${site.name} card.`,
+    `Tier: ${selectedPlan}`,
+    `Wood finish: ${selectedFinish}`,
+    engraving.trim() ? `Engraving / Note: ${engraving.trim()}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+    whatsappMessage,
+  )}`;
+
+  const mailtoHref = `mailto:${site.email}?subject=${encodeURIComponent(
+    `${site.name} Order / Team Enquiry: ${selectedPlan}`,
+  )}&body=${encodeURIComponent(
+    `Hi ${site.name} team,\n\nI would like to order or request an invoice for:\n- Plan: ${selectedPlan}\n- Finish: ${selectedFinish}\n- Engraving / Details: ${
+      engraving.trim() || "To be confirmed"
+    }\n\nThank you.`,
+  )}`;
 
   return (
     <section id="cta" aria-labelledby="cta-heading" className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24">
@@ -31,21 +90,84 @@ export function FinalCta() {
             </div>
 
             <div className="relative mx-auto max-w-2xl">
-              <span className="eyebrow text-[0.625rem] text-brass">Ready when you are</span>
+              <span className="eyebrow text-[0.6875rem] text-brass">Ready when you are</span>
               <h2 id="cta-heading" className="mt-5 text-display text-[clamp(2.1rem,5.6vw,3.75rem)]">
-                Walk into the next room with{" "}
-                <span className="italic text-brass">one card.</span>
+                Walk into the next room and{" "}
+                <span className="italic text-brass">leave your mark.</span>
               </h2>
-              <p className="mx-auto mt-5 max-w-[46ch] text-[0.9375rem] leading-relaxed text-paper/65">
-                Order on WhatsApp in a couple of minutes, or drop us a line for team
-                orders and custom finishes. Dispatch within 48 hours from Nairobi.
+              <p className="mx-auto mt-5 max-w-[48ch] text-[0.9375rem] leading-relaxed text-paper/75">
+                Confirm your tier and timber finish below. Order directly on WhatsApp in
+                under two minutes, or request a formal invoice for your firm. Dispatched
+                within 48 hours from Nairobi.
               </p>
 
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {/* Inline Order Configurator */}
+              <div className="mt-8 rounded-2xl border border-paper/15 bg-paper/[0.06] p-4 text-left backdrop-blur-md sm:p-5">
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div>
+                    <label
+                      htmlFor="cta-plan"
+                      className="block text-[0.6875rem] font-semibold tracking-[0.06em] text-brass uppercase"
+                    >
+                      Plan tier
+                    </label>
+                    <select
+                      id="cta-plan"
+                      value={selectedPlan}
+                      onChange={(e) => setSelectedPlan(e.target.value)}
+                      className="mt-1.5 w-full rounded-xl border border-paper/20 bg-[#0d2a21] px-3 py-2 text-[0.8125rem] font-medium text-paper focus:border-brass focus:outline-none"
+                    >
+                      {planOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="cta-finish"
+                      className="block text-[0.6875rem] font-semibold tracking-[0.06em] text-brass uppercase"
+                    >
+                      Hardwood finish
+                    </label>
+                    <select
+                      id="cta-finish"
+                      value={selectedFinish}
+                      onChange={(e) => setSelectedFinish(e.target.value)}
+                      className="mt-1.5 w-full rounded-xl border border-paper/20 bg-[#0d2a21] px-3 py-2 text-[0.8125rem] font-medium text-paper focus:border-brass focus:outline-none"
+                    >
+                      {finishOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="cta-engraving"
+                      className="block text-[0.6875rem] font-semibold tracking-[0.06em] text-brass uppercase"
+                    >
+                      Name / Firm on card
+                    </label>
+                    <input
+                      id="cta-engraving"
+                      type="text"
+                      value={engraving}
+                      onChange={(e) => setEngraving(e.target.value)}
+                      placeholder="Optional engraving note"
+                      className="mt-1.5 w-full rounded-xl border border-paper/20 bg-[#0d2a21] px-3 py-2 text-[0.8125rem] text-paper placeholder:text-paper/45 focus:border-brass focus:outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <CTA
-                  href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                    "Hi Kadi! I'd like to order a wooden NFC card.",
-                  )}`}
+                  href={whatsappHref}
                   variant="light"
                   size="lg"
                   target="_blank"
@@ -56,27 +178,27 @@ export function FinalCta() {
                   Order on WhatsApp
                 </CTA>
                 <CTA
-                  href={mailto}
+                  href={mailtoHref}
                   variant="secondary"
                   size="lg"
-                  className="border-paper/25 bg-paper/8 text-paper hover:border-paper/40 hover:bg-paper/15"
+                  className="border-paper/25 bg-paper/10 text-paper hover:border-paper/45 hover:bg-paper/18"
                 >
                   <Mail className="size-4" aria-hidden="true" />
-                  Request team pricing
+                  Request invoice / team quote
                 </CTA>
               </div>
 
-              <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-[0.75rem] text-paper/55">
+              <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-[0.75rem] text-paper/70">
                 <li className="inline-flex items-center gap-1.5">
-                  <MapPin className="size-3.5 text-brass/80" aria-hidden="true" />
+                  <MapPin className="size-3.5 text-brass" aria-hidden="true" />
                   {site.location}
                 </li>
                 <li className="inline-flex items-center gap-1.5">
-                  <Clock className="size-3.5 text-brass/80" aria-hidden="true" />
-                  Mon–Sat, 8am–6pm EAT
+                  <Clock className="size-3.5 text-brass" aria-hidden="true" />
+                  Mon to Sat, 8am to 6pm EAT
                 </li>
                 <li className="inline-flex items-center gap-1.5">
-                  <Mail className="size-3.5 text-brass/80" aria-hidden="true" />
+                  <Mail className="size-3.5 text-brass" aria-hidden="true" />
                   {site.email}
                 </li>
               </ul>

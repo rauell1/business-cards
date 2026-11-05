@@ -6,33 +6,33 @@ table, soft delete (`deleted_at`) on user-facing entities.
 ## Entity groups
 
 ### Identity
-- **users** — id, email (unique), email_verified_at, password_hash, name, role
+- **users** - id, email (unique), email_verified_at, password_hash, name, role
   enum(`super_admin`,`admin`,`customer`,`org_admin`,`org_member`), status, deleted_at
-- **user_sessions** — Better Auth sessions
-- **accounts** — OAuth/provider links
-- **organizations** — id, name, slug, logo_url, brand_colour, billing_email
-- **organization_members** — (organization_id, user_id) unique, role
+- **user_sessions** - Better Auth sessions
+- **accounts** - OAuth/provider links
+- **organizations** - id, name, slug, logo_url, brand_colour, billing_email
+- **organization_members** - (organization_id, user_id) unique, role
 
 ### Digital profile
-- **user_profiles** — id, user_id FK, organization_id FK null, username (unique,
+- **user_profiles** - id, user_id FK, organization_id FK null, username (unique,
   citext), full_name, title, bio, company, industry, location, avatar_url,
   cover_url, theme jsonb, is_published, published_at, visibility jsonb
-- **profile_links** — id, profile_id FK, kind enum(`social`,`document`,`custom`),
+- **profile_links** - id, profile_id FK, kind enum(`social`,`document`,`custom`),
   network, label, url, position, is_visible
-- **profile_themes** — preset palettes and layouts
+- **profile_themes** - preset palettes and layouts
 
 ### Hardware
-- **nfc_cards** — id, tag_uid (unique, never exposed publicly), status
+- **nfc_cards** - id, tag_uid (unique, never exposed publicly), status
   enum(`unassigned`,`pending`,`active`,`suspended`,`lost`,`replaced`),
   batch, finish, owner_user_id null
-- **card_assignments** — id, card_id FK, profile_id FK, assigned_at,
+- **card_assignments** - id, card_id FK, profile_id FK, assigned_at,
   unassigned_at, assigned_by. Partial unique index: one active assignment per card.
 
 ### Analytics
-- **profile_events** — id, profile_id FK, card_id FK null,
+- **profile_events** - id, profile_id FK, card_id FK null,
   type enum(...), source enum(`nfc`,`qr`,`link`,`direct`), occurred_at,
   device_category, referrer_host. Indexed on (profile_id, occurred_at).
-- **profile_analytics** — daily rollups (profile_id, day, type, count) for fast dashboards
+- **profile_analytics** - daily rollups (profile_id, day, type, count) for fast dashboards
 
 ### Commerce
 - products · product_variants · product_images · carts · cart_items · orders ·
