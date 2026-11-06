@@ -33,13 +33,16 @@ export function FinalCta() {
       const detail = (e as CustomEvent).detail as {
         plan?: string;
         finish?: string;
+        wording?: string;
         engravingName?: string;
         engravingRole?: string;
         teamSize?: number;
       };
       if (detail?.plan) setSelectedPlan(detail.plan);
       if (detail?.finish) setSelectedFinish(detail.finish);
-      if (detail?.engravingName) {
+      if (detail?.wording) {
+        setEngraving(detail.wording);
+      } else if (detail?.engravingName) {
         setEngraving(
           detail.engravingRole
             ? `${detail.engravingName} · ${detail.engravingRole}`
@@ -53,11 +56,13 @@ export function FinalCta() {
     return () => window.removeEventListener("alama:select-order", onSelect);
   }, []);
 
+  const wordingLines = engraving.split("\n").length;
+
   const whatsappMessage = [
     `Hi ${site.name}! I would like to commission an ${site.name} card.`,
     `Tier: ${selectedPlan}`,
     `Wood finish: ${selectedFinish}`,
-    engraving.trim() ? `Engraving / Note: ${engraving.trim()}` : null,
+    engraving.trim() ? `Card wording:\n${engraving.trim()}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -69,7 +74,7 @@ export function FinalCta() {
   const mailtoHref = `mailto:${site.email}?subject=${encodeURIComponent(
     `${site.name} Order / Team Enquiry: ${selectedPlan}`,
   )}&body=${encodeURIComponent(
-    `Hi ${site.name} team,\n\nI would like to order or request an invoice for:\n- Plan: ${selectedPlan}\n- Finish: ${selectedFinish}\n- Engraving / Details: ${
+    `Hi ${site.name} team,\n\nI would like to order or request an invoice for:\n- Plan: ${selectedPlan}\n- Finish: ${selectedFinish}\n\nCard wording:\n${
       engraving.trim() || "To be confirmed"
     }\n\nThank you.`,
   )}`;
@@ -103,7 +108,7 @@ export function FinalCta() {
 
               {/* Inline Order Configurator */}
               <div className="mt-8 rounded-2xl border border-paper/15 bg-paper/[0.06] p-4 text-left backdrop-blur-md sm:p-5">
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="cta-plan"
@@ -146,20 +151,28 @@ export function FinalCta() {
                     </select>
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="cta-engraving"
-                      className="block text-[0.6875rem] font-semibold tracking-[0.06em] text-brass uppercase"
-                    >
-                      Name / Firm on card
-                    </label>
-                    <input
+                  <div className="sm:col-span-2">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <label
+                        htmlFor="cta-engraving"
+                        className="block text-[0.6875rem] font-semibold tracking-[0.06em] text-brass uppercase"
+                      >
+                        Card wording
+                      </label>
+                      <a
+                        href="#studio"
+                        className="text-[0.6875rem] font-medium text-paper/70 underline-offset-2 hover:text-paper hover:underline"
+                      >
+                        Design it in the studio
+                      </a>
+                    </div>
+                    <textarea
                       id="cta-engraving"
-                      type="text"
+                      rows={Math.min(Math.max(wordingLines, 2), 14)}
                       value={engraving}
                       onChange={(e) => setEngraving(e.target.value)}
-                      placeholder="Optional engraving note"
-                      className="mt-1.5 w-full rounded-xl border border-paper/20 bg-[#0d2a21] px-3 py-2 text-[0.8125rem] text-paper placeholder:text-paper/45 focus:border-brass focus:outline-none"
+                      placeholder="Every line you want engraved: name, title, organisation, tagline, and the reverse call to action"
+                      className="mt-1.5 w-full resize-y rounded-xl border border-paper/20 bg-[#0d2a21] px-3 py-2 font-mono text-[0.75rem] leading-relaxed text-paper placeholder:font-sans placeholder:text-paper/45 focus:border-brass focus:outline-none"
                     />
                   </div>
                 </div>

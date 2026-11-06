@@ -161,7 +161,7 @@ export const features = [
     id: "qr",
     icon: "qr",
     title: "Engraved QR on the reverse",
-    body: "Every Alama carries a precision QR code on the back so older phones, laptops, and conference badges scan effortlessly.",
+    body: "Every Alama carries a QR code laser-etched straight into the back, with no sticker or plate, so older phones, laptops, and conference badges scan effortlessly.",
     span: "lg:col-span-6",
     href: "/#studio",
   },
@@ -248,8 +248,8 @@ export const benefits = [
 ] as const;
 
 export const teamBenefits = [
-  "Branded profiles with your firm colours, logo, and shared pitch documents",
-  "Bulk ordering with laser-etched company crests and per-seat assignment",
+  "Your firm's own wording, monogram, and tagline etched on every card",
+  "Branded profiles with your logo and shared pitch documents",
   "Central admin to onboard or reassign team members in seconds",
   "Organisation-wide tap and conversion analytics on one dashboard",
   "Consistent executive presence across every client-facing partner",
@@ -307,7 +307,7 @@ export const individualPlans: Plan[] = [
     features: [
       "Hand-finished Highland Walnut NFC card",
       "Unlimited profile edits for life",
-      "Precision QR code on the reverse",
+      "QR code laser-etched into the reverse",
       "One-tap vCard save & WhatsApp action",
       "Core tap & scan analytics",
       "Nairobi dispatch in 48 hours",
@@ -324,7 +324,7 @@ export const individualPlans: Plan[] = [
     summary: "For founders, partners, and consultants who share decks and close deals.",
     features: [
       "Everything in Solo, plus a spare card",
-      "Custom laser-etched name & role on wood",
+      "Your own wording etched on front and back",
       "AI paper-card scanner (12 months included)",
       "Share PDF briefs, portfolio & booking links",
       "Advanced link-level conversion analytics",
@@ -340,13 +340,13 @@ export const individualPlans: Plan[] = [
     name: "Atelier",
     price: "KES 12,000",
     period: "one-time",
-    note: "Mpingo Ebony or Rift Olive Wood · brass QR inlay",
+    note: "Mpingo Ebony or Rift Olive Wood · deep-etched QR",
     summary: "For executives who treat a first impression as an enduring craft.",
     features: [
       "Everything in Professional",
       "Hand-oiled Mpingo Ebony or Rift Olive finish",
       "Bespoke laser-etched crest or monogram",
-      "Engraved solid brass QR reverse plate",
+      "Deep laser-etched QR on the reverse",
       "Hardwood desk stand & presentation box",
       "Lifetime AI paper-card scanner access",
     ],
@@ -424,8 +424,12 @@ export const faqs = [
     a: "A paper card only transfers a phone number that someone has to type in later. Your Alama profile lets you attach high-value resources right under your name: a downloadable company capability statement, a calendar booking link, case studies, and a one-tap vCard save that includes your portrait so they always remember your face.",
   },
   {
+    q: "Can the card carry my own or my organisation's wording?",
+    a: "Yes. Every line on the card is yours: name, title, organisation, tagline, a monogram or wordmark in the centre, and the call to action and footer on the reverse. Cards can lead with a person or with your organisation, and the Alama maker's mark is optional. Design it in the card studio above, or send your wording with your order and we confirm the layout with you before engraving.",
+  },
+  {
     q: "What if their phone doesn't support NFC?",
-    a: "Every card carries a high-contrast QR code on the reverse that opens the exact same profile. You also get a downloadable SVG and PNG QR code in your dashboard for presentation slides, email signatures, and event lanyards.",
+    a: "Every card carries a QR code laser-etched into the reverse that opens the exact same profile. You also get a downloadable SVG and PNG QR code in your dashboard for presentation slides, email signatures, and event lanyards.",
   },
   {
     q: "What happens when I change roles, firms, or phone numbers?",
@@ -480,7 +484,7 @@ export const showcase = {
     {
       id: "qr",
       label: "Reverse QR",
-      title: "Precision QR on wood or brass",
+      title: "Precision QR etched into the wood",
       body: "Etched on the reverse side to survive years in a pocket or cardholder. Recipients scan with their camera, and you can export matching SVG or PNG codes for decks and event badges.",
       points: [
         "Crisp vector SVG & PNG export",

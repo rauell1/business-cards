@@ -33,7 +33,7 @@ export default function HomePage() {
         <Hero />
         <SocialProof />
         <Mission />
-        <CardStudio qr={demoQr} />
+        <CardStudio />
         <Features />
         <HowItWorks />
         <Showcase qr={demoQr} />
