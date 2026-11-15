@@ -13,3 +13,8 @@ next-env.d.ts
 coverage/
 playwright-report/
 test-results/
+
+# Cloudflare (OpenNext build output, Wrangler state, local secrets)
+/.open-next/
+/.wrangler/
+.dev.vars
