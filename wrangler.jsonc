@@ -8,5 +8,7 @@
   // Runtime secrets are set with `npx wrangler secret put NAME` or in the Cloudflare dashboard.
   "keep_vars": true,
   "workers_dev": true,
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Page cache for open-next.config.ts.
+  "kv_namespaces": [{ "binding": "NEXT_INC_CACHE_KV", "id": "31cba4921b8d4c69a879b68cc8579a46" }]
 }
