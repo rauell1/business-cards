@@ -9,6 +9,9 @@
   "keep_vars": true,
   "workers_dev": true,
   "observability": { "enabled": true },
-  // Page cache for open-next.config.ts.
-  "kv_namespaces": [{ "binding": "NEXT_INC_CACHE_KV", "id": "31cba4921b8d4c69a879b68cc8579a46" }]
+  // Page cache for open-next.config.ts (pages kept in R2; the bucket was
+  // created ahead of the deploy).
+  "r2_buckets": [
+    { "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "business-cards-next-cache" }
+  ]
 }
