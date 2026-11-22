@@ -1,4 +1,20 @@
-# Alama Identity: wooden NFC business cards
+<!-- header:start -->
+<div align="center">
+
+# Alama Identity
+
+**Alama Identity: wooden NFC business cards that open a digital profile with one tap. Marketing site, card studio and public profiles built with Next.js.**
+
+[![Live: business-cards.rauell.workers.dev](https://img.shields.io/badge/Live-business--cards.rauell.workers.dev-0d9488?style=for-the-badge&logo=cloudflare&logoColor=white)](https://business-cards.rauell.workers.dev) ![Status: live](https://img.shields.io/badge/Status-Live-2ea44f?style=for-the-badge) ![Public repository](https://img.shields.io/badge/Repo-Public-555555?style=for-the-badge&logo=github)
+
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white) ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white) ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-f38020?style=flat-square&logo=cloudflare&logoColor=white)
+
+[Live site](https://business-cards.rauell.workers.dev) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md)
+
+</div>
+
+---
+<!-- header:end -->
 
 A production-grade marketing site and digital-identity platform for **Alama** (`alama.africa`), built with Next.js 15 (App Router), TypeScript in strict mode, and Tailwind CSS v4.
 
